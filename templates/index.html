@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Chat</title>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelector('button').onclick = () => {
+
+                        // store name in local storage
+                        let name = document.querySelector('#name').value
+                        localStorage.setItem('name', name);
+                    }
+                });
+            </script>
+        </head>
+        <body>
+            <form>
+                <input type="text" id="name" name="name" placeholder="Name" autocomplete="off" >
+                <button>Enter</button>
+            </form>
+            <div id="test"></div>
+        </body>
+    </html>
