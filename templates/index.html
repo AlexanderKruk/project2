@@ -18,6 +18,14 @@
                 <input type="text" id="name" name="name" placeholder="Name" autocomplete="off" >
                 <button>Enter</button>
             </form>
-            <div id="test"></div>
+            </br>
+            <form action="/channels" method="post">
+                <input type="text" name="channel" placeholder="Channel" autocomplete="off" >
+                <button type="submit">Create</button>
+            </form>
+            </br>
+            {% for channel in channels %}
+                {{ channel.channel }} </br>
+            {% endfor %}
         </body>
     </html>

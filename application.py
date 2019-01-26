@@ -1,9 +1,14 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
+from models import *
 #from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
+db.init_app(app)
 
 # config SocketIO
 #app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -11,12 +16,17 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    channels = Channels.query.all()
+    return render_template("index.html", channels=channels)
 
-@app.route("/channels", methods = ["GET","POST"])
+@app.route("/channels", methods = ["POST"])
 def channels():
     if request.method == "GET":
-        pass
+        return redirect("/")
     elif request.method == "POST":
-        pass
+        if (Channels.query.filter_by(channel=request.form.get("channel")).count() == 0):
+            channel = Channels(channel=request.form.get("channel"))
+            db.session.add(channel)
+            db.session.commit()
+        return redirect("/")
 
