@@ -20,7 +20,7 @@ def index():
     channels = Channels.query.all()
     return render_template("index.html", channels=channels)
 
-@app.route("/channels", methods = ["POST"])
+@app.route("/channels", methods = ["GET","POST"])
 def channels():
     if request.method == "GET":
         return redirect("/")

@@ -32,10 +32,10 @@
                     <button id="button" type="submit">Submit</button>
                 </form>
             </br>
-            <!--{% for channel in channels %}-->
-            <!--    {{ channel.channel }} </br>-->
-            <!--{% endfor %}-->
-            <!--</br>-->
+            {% for channel in channels %}
+                <a href="{{ url_for('channels', channel_name = channel.channel) }}"> {{ channel.channel }} </a> </br>
+            {% endfor %}
+            </br>
             <ul id="chat">
             </ul>
         </body>
